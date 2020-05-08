@@ -14,6 +14,13 @@ class Pessoa {
   // argumentos posicionais são obrigatórios
   Pessoa(this.nome, this.idade, this.altura);
 
+  // named constructor
+  Pessoa.nascer(this.nome, this.altura) {
+    idade  = 0;
+    print("$nome nasceu!");
+    dormir();
+  }
+
 
   void dormir() {
     print("A pessoa $nome está dormindo");
@@ -40,5 +47,10 @@ void main() {
   print("nome ${pessoa1.nome}");
   print("idade ${pessoa1.idade}");
   print("altura ${pessoa1.altura}");
+
+
+  // usando um named constructor
+  Pessoa pessoa2 = Pessoa.nascer("Enzo", 0.5);
+  print(pessoa2.idade);
 
 }
