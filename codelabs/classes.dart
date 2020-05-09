@@ -31,9 +31,12 @@ class Pessoa {
     return _id;
   }
 
-  int get teste {
-    return _teste;
-  }
+  // forma abreviada para um get
+  int get teste => _teste;
+
+//  int get teste {
+//    return _teste;
+//  }
 
   set teste(int value) {
     _teste = value;
