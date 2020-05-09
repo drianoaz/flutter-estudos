@@ -6,7 +6,39 @@ void main() {
   runApp(
     MaterialApp(
       title: 'Contador de pessoas',
-      home: Stack(
+      home: Home(),
+    ),
+  );
+}
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int _pessoas = 0;
+  String _infoText = "Pode entrar";
+
+  void _changePeople(int delta) {
+    setState(() {
+      _pessoas += delta;
+
+      if(_pessoas < 0) {
+        _infoText = "Mundo invertido?!";
+      } else if(_pessoas <= 10) {
+        _infoText = "Pode entrar";
+      } else {
+        _infoText = "Lotado!";
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Stack(
         children: <Widget>[
           Image.asset(
             "images/restaurant.jpg",
@@ -17,7 +49,7 @@ void main() {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Pessoas: 0",
+                "Pessoas: $_pessoas",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -29,8 +61,8 @@ void main() {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: FlatButton(
-                      onPressed: ()  {
-
+                      onPressed: () {
+                        _changePeople(1);
                       },
                       child: Text(
                         "+1",
@@ -44,7 +76,9 @@ void main() {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _changePeople(-1);
+                      },
                       child: Text(
                         "-1",
                         style: TextStyle(
@@ -57,7 +91,7 @@ void main() {
                 ],
               ),
               Text(
-                "Pode entrar",
+                _infoText,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 30,
@@ -68,6 +102,6 @@ void main() {
           )
         ],
       ),
-    ),
-  );
+    );
+  }
 }
