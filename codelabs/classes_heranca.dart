@@ -1,5 +1,5 @@
 
-class Animal {
+abstract class Animal {
 
   String nome;
   double peso;
@@ -10,9 +10,8 @@ class Animal {
     print("$nome comeu!");
   }
 
-  void fazerSom() {
-    print("$nome faz algum som!");
-  }
+  // se o metetodo não tem corpo somos obrigados a redeclarar
+  void fazerSom();
 
 }
 
