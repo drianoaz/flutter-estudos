@@ -24,9 +24,9 @@ class _HomeState extends State<Home> {
     setState(() {
       _pessoas += delta;
 
-      if(_pessoas < 0) {
+      if (_pessoas < 0) {
         _infoText = "Mundo invertido?!";
-      } else if(_pessoas <= 10) {
+      } else if (_pessoas <= 10) {
         _infoText = "Pode entrar";
       } else {
         _infoText = "Lotado!";
@@ -53,6 +53,7 @@ class _HomeState extends State<Home> {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.none,
                 ),
               ),
               Row(
@@ -96,6 +97,7 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                   fontSize: 30,
                   fontStyle: FontStyle.italic,
+                  decoration: TextDecoration.none,
                 ),
               ),
             ],
