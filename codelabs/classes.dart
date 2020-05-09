@@ -1,18 +1,24 @@
+import 'dart:math';
+
 class Pessoa {
 
   String nome;
   int idade;
   double altura;
+  int _id;
+  int _teste;
 
-//
-//  Pessoa(String nome, int idade, double altura) {
+//    Pessoa(String nome, int idade, double altura) {
 //    this.nome = nome;
 //    this.idade = idade;
 //    this.altura = altura
 //  }
 
   // argumentos posicionais são obrigatórios
-  Pessoa(this.nome, this.idade, this.altura);
+  Pessoa(this.nome, this.idade, this.altura) {
+    Random rand = Random();
+    _id = rand.nextInt(500);
+  }
 
   // named constructor
   Pessoa.nascer(this.nome, this.altura) {
@@ -21,6 +27,17 @@ class Pessoa {
     dormir();
   }
 
+  int get id {
+    return _id;
+  }
+
+  int get teste {
+    return _teste;
+  }
+
+  set teste(int value) {
+    _teste = value;
+  }
 
   void dormir() {
     print("A pessoa $nome está dormindo");
@@ -44,9 +61,13 @@ void main() {
   pessoa1.dormir();
   pessoa1.aniversario();
 
+  pessoa1.teste = 50;
+
   print("nome ${pessoa1.nome}");
   print("idade ${pessoa1.idade}");
   print("altura ${pessoa1.altura}");
+  print("id ${pessoa1.id}");
+  print("teste ${pessoa1.teste}");
 
 
   // usando um named constructor
