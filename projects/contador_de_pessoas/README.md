@@ -1,16 +1,13 @@
-# contador_de_pessoas
+# Contador de pessoas
 
-A new Flutter project.
+Um aplicativo para controlar se pode ou não entrar mais pessoas em um restaurante.
 
-## Getting Started
+![Contador de pessoas](./_docs/contador_de_pessoas.gif)
 
-This project is a starting point for a Flutter application.
+## O que aprendi nesse projeto?
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- A diferença entre Statefull e Stateless widget 
+- Colocar uma imagem no aplicativo
+- Usar diferentes tipos de componentes, como por exemplo: `Stack`, `Row`, `Column`, `FlatButton`, `Text`, etc...
+- Controlar o estado do aplicativo usando a função `setState`
+- Escrever testes básicos de Widget
