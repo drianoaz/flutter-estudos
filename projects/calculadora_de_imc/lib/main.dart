@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   TextEditingController weightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
 
-  String _infoText = "Informe seu peso!";
+  String _infoText = "Informe seus dados!";
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
     heightController.text = "";
 
     setState(() {
-      _infoText = "Informe seu peso!";
+      _infoText = "Informe seus dados!";
       _formKey = GlobalKey<FormState>();
     });
   }
