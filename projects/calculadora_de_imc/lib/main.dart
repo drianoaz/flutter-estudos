@@ -21,10 +21,10 @@ class _HomeState extends State<Home> {
   String _infoText = "Informe seu peso!";
 
   void _resetFields() {
-    setState(() {
-      weightController.text = "";
-      heightController.text = "";
+    weightController.text = "";
+    heightController.text = "";
 
+    setState(() {
       _infoText = "Informe seu peso!";
     });
   }
