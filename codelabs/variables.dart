@@ -16,6 +16,20 @@ void main() {
   var tipoImplicito = 10;
   print(tipoImplicito);
 
+  var image = {
+    'tags': ['saturn'],
+    'url': '//path/to/saturn.jpg'
+  };
+
+  int adriano = 1;
+//  Map();
+
+//  print(image['tags']);
+
+  final List<String> names = ["bla", "ble", "bli"];
+  names.add("xablau");
+  // Unsupported operation: Cannot add to an unmodifiable list
+
 
   // se declararmos uma variável com um determinado tipo, ela só poderá
   // armazenar valores correspondentes a esse tipo a não ser que o tipo

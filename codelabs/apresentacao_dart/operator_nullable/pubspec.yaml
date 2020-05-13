@@ -1,0 +1,3 @@
+name: my_app
+dependencies:
+  recase: ^2.0.1

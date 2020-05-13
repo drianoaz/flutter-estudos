@@ -53,7 +53,24 @@ class Pessoa {
 
 }
 
+class Quadrado {
+  int lado;
+  Quadrado(this.lado);
+
+  operator +(Quadrado quadrado) {
+    return Quadrado(this.lado + quadrado.lado);
+  }
+}
+
 void main() {
+
+  final quadrado1 = Quadrado(2);
+  final quadrado2 = Quadrado(4);
+
+  final somaQuadrados = quadrado1 + quadrado2;
+  print(somaQuadrados.lado);
+
+  int adriano = 1;
 
   // usar new é opcional em dart
   Pessoa pessoa1 = Pessoa("Adriano", 23, 1.68);

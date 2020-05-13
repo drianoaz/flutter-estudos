@@ -1,0 +1,19 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "recase",
+      "rootUri": "file:///Users/aazevedo/.pub-cache/hosted/pub.dartlang.org/recase-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "1.20"
+    },
+    {
+      "name": "my_app",
+      "rootUri": "../",
+      "packageUri": "lib/"
+    }
+  ],
+  "generated": "2020-05-13T11:27:12.529263Z",
+  "generator": "pub",
+  "generatorVersion": "2.8.1"
+}
