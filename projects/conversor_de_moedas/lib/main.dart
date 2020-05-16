@@ -140,5 +140,6 @@ Widget buildTextField({
       prefixText: prefix,
     ),
     style: TextStyle(color: Colors.amber, fontSize: 25.0),
+    keyboardType: TextInputType.number,
   );
 }
