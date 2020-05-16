@@ -41,6 +41,18 @@ class _HomeState extends State<Home> {
   final dolarController = TextEditingController();
   final euroController = TextEditingController();
 
+  void _realChanged(String text) {
+    print(text);
+  }
+
+  void _dolarChanged(String text) {
+    print(text);
+  }
+
+  void _euroChanged(String text) {
+    print(text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,18 +99,21 @@ class _HomeState extends State<Home> {
                         label: "Reais",
                         prefix: "R\$",
                         controller: realController,
+                        onChanged: _realChanged,
                       ),
                       Divider(),
                       buildTextField(
                         label: "Dólares",
                         prefix: "US\$",
                         controller: dolarController,
+                        onChanged: _dolarChanged,
                       ),
                       Divider(),
                       buildTextField(
                         label: "Euros",
                         prefix: "€",
                         controller: euroController,
+                        onChanged: _euroChanged,
                       ),
                     ],
                   ),
@@ -115,9 +130,11 @@ Widget buildTextField({
   @required String label,
   @required String prefix,
   @required TextEditingController controller,
+  @required Function onChanged,
 }) {
   return TextField(
     controller: controller,
+    onChanged: onChanged,
     decoration: InputDecoration(
       labelText: label,
       prefixText: prefix,
