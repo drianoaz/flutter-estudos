@@ -36,6 +36,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final realController = TextEditingController();
+  final dolarController = TextEditingController();
+  final euroController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,11 +83,23 @@ class _HomeState extends State<Home> {
                         size: 150.0,
                         color: Colors.amber,
                       ),
-                      buildTextField(label: "Reais", prefix: "R\$"),
+                      buildTextField(
+                        label: "Reais",
+                        prefix: "R\$",
+                        controller: realController,
+                      ),
                       Divider(),
-                      buildTextField(label: "Dólares", prefix: "US\$"),
+                      buildTextField(
+                        label: "Dólares",
+                        prefix: "US\$",
+                        controller: dolarController,
+                      ),
                       Divider(),
-                      buildTextField(label: "Euros", prefix: "€"),
+                      buildTextField(
+                        label: "Euros",
+                        prefix: "€",
+                        controller: euroController,
+                      ),
                     ],
                   ),
                 );
@@ -94,8 +111,13 @@ class _HomeState extends State<Home> {
   }
 }
 
-Widget buildTextField({@required String label, @required String prefix}) {
+Widget buildTextField({
+  @required String label,
+  @required String prefix,
+  @required TextEditingController controller,
+}) {
   return TextField(
+    controller: controller,
     decoration: InputDecoration(
       labelText: label,
       prefixText: prefix,
