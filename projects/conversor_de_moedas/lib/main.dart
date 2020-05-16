@@ -6,10 +6,21 @@ import 'package:http/http.dart' as http;
 const API_URL = "https://api.hgbrasil.com/finance?format=json&key=07af06a5";
 
 void main() async {
-  final response = await getData();
-  print(response);
-
   runApp(MaterialApp(
+    theme: ThemeData(
+      hintColor: Colors.amber,
+      primaryColor: Colors.white,
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          color: Colors.amber,
+        ),
+        enabledBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.amber)),
+        focusedBorder:
+            OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
+        hintStyle: TextStyle(color: Colors.amber),
+      ),
+    ),
     home: Home(),
   ));
 }
@@ -57,8 +68,41 @@ class _HomeState extends State<Home> {
                   ),
                 );
               } else {
-                return Container(
-                  color: Colors.blue,
+                return SingleChildScrollView(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Icon(
+                        Icons.monetization_on,
+                        size: 150.0,
+                        color: Colors.amber,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: "Reais",
+                          prefixText: "R\$",
+                        ),
+                        style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                      ),
+                      Divider(),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: "Dólares",
+                          prefixText: "US\$",
+                        ),
+                        style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                      ),
+                      Divider(),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: "Euros",
+                          prefixText: "€",
+                        ),
+                        style: TextStyle(color: Colors.amber, fontSize: 25.0),
+                      ),
+                    ],
+                  ),
                 );
               }
           }
