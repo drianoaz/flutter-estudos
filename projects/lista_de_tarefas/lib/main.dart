@@ -18,7 +18,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List _toDoList = [];
+  List _toDoList = [
+    {
+      "title": "Aprender flutter",
+      "ok": false,
+    },
+    {
+      "title": "Estudar dart",
+      "ok": true,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +56,26 @@ class _HomeState extends State<Home> {
                 RaisedButton(
                   color: Colors.blueAccent,
                   child: Text("Add"),
-                  textColor: Colors.white, onPressed: () {  },
+                  textColor: Colors.white,
+                  onPressed: () {},
                 )
               ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _toDoList.length,
+              itemBuilder: (BuildContext context, index) {
+                return CheckboxListTile(
+                  title: Text(_toDoList[index]["title"]),
+                  value: _toDoList[index]["ok"],
+                  secondary: CircleAvatar(
+                    child: _toDoList[index]["ok"]
+                        ? Icon(Icons.check)
+                        : Icon(Icons.error),
+                  ),
+                );
+              },
             ),
           )
         ],
