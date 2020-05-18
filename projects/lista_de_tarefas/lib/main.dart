@@ -22,6 +22,13 @@ class _HomeState extends State<Home> {
 
   final newTodoController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+
+    _readData();
+  }
+
   void _addToDo() {
     setState(() {
       _toDoList.add({
@@ -30,12 +37,14 @@ class _HomeState extends State<Home> {
       });
 
       newTodoController.clear();
+      _saveData();
     });
   }
 
   void _onToDoChanged(bool checked, int index) {
     setState(() {
       _toDoList[index]["ok"] = checked;
+      _saveData();
     });
   }
 
@@ -107,8 +116,12 @@ class _HomeState extends State<Home> {
     return file.writeAsString(data);
   }
 
-  Future<String> _readData() async {
+  Future<void> _readData() async {
     final file = await _getFile();
-    return file.readAsString();
+    final String data = await file.readAsString();
+
+    setState(() {
+      _toDoList = json.decode(data);
+    });
   }
 }
