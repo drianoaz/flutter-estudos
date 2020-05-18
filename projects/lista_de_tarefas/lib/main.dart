@@ -33,6 +33,12 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void _onToDoChanged(bool checked, int index) {
+    setState(() {
+      _toDoList[index]["ok"] = checked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +78,7 @@ class _HomeState extends State<Home> {
               itemCount: _toDoList.length,
               itemBuilder: (BuildContext context, index) {
                 return CheckboxListTile(
+                  onChanged: (bool checked) => _onToDoChanged(checked, index),
                   title: Text(_toDoList[index]["title"]),
                   value: _toDoList[index]["ok"],
                   secondary: CircleAvatar(
