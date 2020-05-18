@@ -85,21 +85,23 @@ class _HomeState extends State<Home> {
           Expanded(
             child: ListView.builder(
               itemCount: _toDoList.length,
-              itemBuilder: (BuildContext context, index) {
-                return CheckboxListTile(
-                  onChanged: (bool checked) => _onToDoChanged(checked, index),
-                  title: Text(_toDoList[index]["title"]),
-                  value: _toDoList[index]["ok"],
-                  secondary: CircleAvatar(
-                    child: _toDoList[index]["ok"]
-                        ? Icon(Icons.check)
-                        : Icon(Icons.error),
-                  ),
-                );
-              },
+              itemBuilder: buildItem,
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget buildItem(BuildContext context, index) {
+    return CheckboxListTile(
+      onChanged: (bool checked) => _onToDoChanged(checked, index),
+      title: Text(_toDoList[index]["title"]),
+      value: _toDoList[index]["ok"],
+      secondary: CircleAvatar(
+        child: _toDoList[index]["ok"]
+            ? Icon(Icons.check)
+            : Icon(Icons.error),
       ),
     );
   }
