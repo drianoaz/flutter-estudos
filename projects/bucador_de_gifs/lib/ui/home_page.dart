@@ -47,6 +47,11 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
                 fontSize: 18.0,
               ),
+              onSubmitted: (text) {
+                setState(() {
+                  _search = text;
+                });
+              },
             ),
           ),
           Expanded(
