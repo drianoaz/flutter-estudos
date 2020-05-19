@@ -51,25 +51,27 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: FutureBuilder(
-              future: _getGifs(),
-              builder: (context, snapshot) {
-                switch(snapshot.connectionState) {
-                  case(ConnectionState.waiting):
-                  case(ConnectionState.none):
-                    return Container(
-                      width: 200.0,
-                      height: 200.0,
-                      alignment: Alignment.center,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    );
-                  default:
-                    if(snapshot.hasError) return Container();
-                    else return _createTable(context, snapshot);
-                }
-              }
-            ),
+                future: _getGifs(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case (ConnectionState.waiting):
+                    case (ConnectionState.none):
+                      return Container(
+                        width: 200.0,
+                        height: 200.0,
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      );
+                    default:
+                      if (snapshot.hasError)
+                        return Container();
+                      else
+                        return _createTable(context, snapshot);
+                  }
+                }),
           )
         ],
       ),
@@ -77,6 +79,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _createTable(BuildContext context, AsyncSnapshot snapshot) {
-    return Container();
+    return GridView.builder(
+        padding: EdgeInsets.all(10.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+        ),
+        itemCount: snapshot.data["data"].length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            child: Image.network(
+              snapshot.data["data"][index]["images"]["fixed_height"]["url"],
+              height: 200,
+              fit: BoxFit.cover,
+            ),
+          );
+        });
   }
 }
