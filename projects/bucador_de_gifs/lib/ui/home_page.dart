@@ -13,14 +13,15 @@ class _HomePageState extends State<HomePage> {
 
   Future<Map> _getGifs() async {
     http.Response response;
-    if(_search == null)
-      response = await http.get("https://api.giphy.com/v1/gifs/trending?api_key=OGzwuUNZJddRFAQZcc51DU221JoX2vsG&limit=25&rating=G");
+    if (_search == null)
+      response = await http.get(
+          "https://api.giphy.com/v1/gifs/trending?api_key=OGzwuUNZJddRFAQZcc51DU221JoX2vsG&limit=25&rating=G");
     else
-      response = await http.get("https://api.giphy.com/v1/gifs/search?api_key=OGzwuUNZJddRFAQZcc51DU221JoX2vsG&q=$_search&limit=25&offset=0&rating=G&lang=en");
+      response = await http.get(
+          "https://api.giphy.com/v1/gifs/search?api_key=OGzwuUNZJddRFAQZcc51DU221JoX2vsG&q=$_search&limit=25&offset=0&rating=G&lang=en");
 
     return json.decode(response.body);
   }
-
 
   @override
   void initState() {
@@ -31,6 +32,32 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Image.network(
+            "https://developers.giphy.com/static/img/dev-logo-lg.7404c00322a8.gif"),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.black,
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10.0),
+            child: TextField(
+              decoration: InputDecoration(
+                labelText: "Pesquise aqui",
+                labelStyle: TextStyle(color: Colors.white),
+              ),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
