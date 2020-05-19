@@ -48,6 +48,23 @@ class _HomeState extends State<Home> {
     });
   }
 
+  Future<void> _onRefresh() async {
+    await Future.delayed(Duration(seconds: 1));
+
+    setState(() {
+      _toDoList.sort((a, b) {
+        if (a["ok"] && !b["ok"])
+          return 1;
+        else if (!a["ok"] && b["ok"])
+          return -1;
+        else
+          return 0;
+      });
+
+      _saveData();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +100,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: _toDoList.length,
-              itemBuilder: buildItem,
+            child: RefreshIndicator(
+              onRefresh: _onRefresh,
+              child: ListView.builder(
+                itemCount: _toDoList.length,
+                itemBuilder: buildItem,
+              ),
             ),
           )
         ],
@@ -123,7 +143,10 @@ class _HomeState extends State<Home> {
         color: Colors.red,
         child: Align(
           alignment: Alignment(-0.9, 0.0),
-          child: Icon(Icons.delete, color: Colors.white,),
+          child: Icon(
+            Icons.delete,
+            color: Colors.white,
+          ),
         ),
       ),
       child: CheckboxListTile(
@@ -131,9 +154,7 @@ class _HomeState extends State<Home> {
         title: Text(_toDoList[index]["title"]),
         value: _toDoList[index]["ok"],
         secondary: CircleAvatar(
-          child: _toDoList[index]["ok"]
-              ? Icon(Icons.check)
-              : Icon(Icons.error),
+          child: _toDoList[index]["ok"] ? Icon(Icons.check) : Icon(Icons.error),
         ),
       ),
     );
