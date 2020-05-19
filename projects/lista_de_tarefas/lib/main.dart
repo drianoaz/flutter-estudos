@@ -97,6 +97,28 @@ class _HomeState extends State<Home> {
     return Dismissible(
       key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
       direction: DismissDirection.startToEnd,
+      onDismissed: (_) {
+        final removedElement = Map.from(_toDoList[index]);
+        _toDoList.removeAt(index);
+
+        _saveData();
+
+        final snack = SnackBar(
+          content: Text('Tarefa "${removedElement["title"]}" removida!'),
+          duration: Duration(seconds: 2),
+          action: SnackBarAction(
+            label: "Desfazer",
+            onPressed: () {
+              setState(() {
+                _toDoList.insert(index, removedElement);
+                _saveData();
+              });
+            },
+          ),
+        );
+
+        Scaffold.of(context).showSnackBar(snack);
+      },
       background: Container(
         color: Colors.red,
         child: Align(
