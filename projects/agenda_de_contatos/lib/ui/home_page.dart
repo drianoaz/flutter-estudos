@@ -17,19 +17,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    final contact = Contact(
-        name: "Adriano de Azevedo",
-        email: "contato@adriano.dev",
-        phone: "11 9 1234-1234",
-        img: "teste.jpg");
-
-    helper.saveContact(contact);
-
-    helper.getAllContacts().then((List<Contact> list) {
-      setState(() {
-        contacts = list;
-      });
-    });
+    _getAllContacts();
   }
 
   @override
@@ -52,8 +40,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _showContactPage({Contact contact}) {
-    Navigator.push(
+  Future<void> _getAllContacts() async {
+    List<Contact> list = await helper.getAllContacts();
+
+    setState(() {
+      contacts = list;
+    });
+  }
+
+  _showContactPage({Contact contact}) async {
+    final recContact = await Navigator.push(
       context,
       MaterialPageRoute(builder: (_) {
         return ContactPage(
@@ -61,6 +57,16 @@ class _HomePageState extends State<HomePage> {
         );
       }),
     );
+
+    if(recContact != null) {
+      if(contact != null) {
+        await helper.updateContact(recContact);
+      } else {
+        await helper.saveContact(contact);
+      }
+
+      _getAllContacts();
+    }
   }
 
   Widget contactBuilder(BuildContext context, int index) {

@@ -95,7 +95,9 @@ class _ContactPageState extends State<ContactPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.save),
         backgroundColor: Colors.red,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pop(_editedContact);
+        },
       ),
     );
   }
