@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<Map> _getGifs() async {
     http.Response response;
-    if (_search == null)
+    if (_search == null || _search.isEmpty)
       response = await http.get(
           "https://api.giphy.com/v1/gifs/trending?api_key=OGzwuUNZJddRFAQZcc51DU221JoX2vsG&limit=20&rating=G");
     else
@@ -110,7 +110,8 @@ class _HomePageState extends State<HomePage> {
             return GestureDetector(
               child: FadeInImage.memoryNetwork(
                 placeholder: kTransparentImage,
-                image: snapshot.data["data"][index]["images"]["fixed_height"]["url"],
+                image: snapshot.data["data"][index]["images"]["fixed_height"]
+                    ["url"],
                 height: 200,
                 fit: BoxFit.cover,
               ),
