@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:agenda_de_contatos/helpers/contact_helper.dart';
+import 'package:agenda_de_contatos/ui/contact_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,7 +45,14 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: contactBuilder,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) {
+              return ContactPage();
+            }),
+          );
+        },
         backgroundColor: Colors.red,
         child: Icon(Icons.add),
       ),
@@ -78,15 +86,13 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Text(
                     contact.name ?? "",
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold
-                    ),
+                    style:
+                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     contact.email ?? "",
                     style: TextStyle(
-                        fontSize: 18.0,
+                      fontSize: 18.0,
                     ),
                   ),
                   Text(
