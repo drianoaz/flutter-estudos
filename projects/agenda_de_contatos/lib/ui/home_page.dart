@@ -63,6 +63,16 @@ class _HomePageState extends State<HomePage> {
     final contact = contacts[index];
 
     return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) {
+            return ContactPage(
+              contact: contacts[index],
+            );
+          }),
+        );
+      },
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(10.0),
