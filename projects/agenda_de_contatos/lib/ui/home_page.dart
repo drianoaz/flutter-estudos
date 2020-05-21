@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-enum OrderOptions {orderaz, orderza}
+enum OrderOptions { orderaz, orderza }
 
 class _HomePageState extends State<HomePage> {
   ContactHelper helper = ContactHelper();
@@ -173,6 +173,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
+                    fit: BoxFit.cover,
                     image: contact.img != null
                         ? FileImage(File(contact.img))
                         : AssetImage("images/person.png"),
@@ -209,9 +210,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
-  void _orderList(OrderOptions result){
-    switch(result){
+  void _orderList(OrderOptions result) {
+    switch (result) {
       case OrderOptions.orderaz:
         contacts.sort((a, b) {
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
@@ -223,8 +223,6 @@ class _HomePageState extends State<HomePage> {
         });
         break;
     }
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
