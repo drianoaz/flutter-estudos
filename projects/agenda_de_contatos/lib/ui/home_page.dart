@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
       if (contact != null) {
         await helper.updateContact(recContact);
       } else {
-        await helper.saveContact(contact);
+        await helper.saveContact(recContact);
       }
 
       _getAllContacts();
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   image: DecorationImage(
                     image: contact.img != null
                         ? FileImage(File(contact.img))
-                        : Image.asset("images/person.png"),
+                        : AssetImage("images/person.png"),
                   ),
                 ),
                 alignment: Alignment.center,
