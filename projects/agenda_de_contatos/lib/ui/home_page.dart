@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
       }),
     );
 
-    if(recContact != null) {
-      if(contact != null) {
+    if (recContact != null) {
+      if (contact != null) {
         await helper.updateContact(recContact);
       } else {
         await helper.saveContact(contact);
@@ -69,11 +69,78 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  _showBottomSheet(int index) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+            onClosing: () {},
+            builder: (context) {
+              return Container(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: FlatButton(
+                        child: Text(
+                          "Ligar",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.red,
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: FlatButton(
+                        child: Text(
+                          "Editar",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.red,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          _showContactPage(contact: contacts[index]);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: FlatButton(
+                        child: Text(
+                          "Excluir",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.red,
+                          ),
+                        ),
+                        onPressed: () {
+                          helper.deleteContact(contacts[index].id);
+                          _getAllContacts();
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        });
+  }
+
   Widget contactBuilder(BuildContext context, int index) {
     final contact = contacts[index];
 
     return GestureDetector(
-      onTap: () => _showContactPage(contact: contact),
+      onTap: () => _showBottomSheet(index),
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(10.0),
