@@ -19,6 +19,8 @@ class _ContactPageState extends State<ContactPage> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
 
+  final _nameNode = FocusNode();
+
   bool _userEdited = false;
 
   @override
@@ -63,6 +65,7 @@ class _ContactPageState extends State<ContactPage> {
             ),
             TextField(
               controller: _nameController,
+              focusNode: _nameNode,
               decoration: InputDecoration(labelText: "Name"),
               onChanged: (text) {
                 _userEdited = true;
@@ -96,7 +99,11 @@ class _ContactPageState extends State<ContactPage> {
         child: Icon(Icons.save),
         backgroundColor: Colors.red,
         onPressed: () {
-          Navigator.of(context).pop(_editedContact);
+          if (_nameController.text != null && _nameController.text.isNotEmpty) {
+            Navigator.of(context).pop(_editedContact);
+          } else {
+            FocusScope.of(context).requestFocus(_nameNode);
+          }
         },
       ),
     );
