@@ -19,6 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   FirebaseUser _currentUser;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -80,10 +81,18 @@ class _ChatScreenState extends State<ChatScreen> {
           .child(DateTime.now().millisecondsSinceEpoch.toString())
           .putFile(imgFile);
 
+      setState(() {
+        _isLoading = true;
+      });
+
       StorageTaskSnapshot snapshot = await task.onComplete;
       String url = await snapshot.ref.getDownloadURL();
 
       data["imgUrl"] = url;
+
+      setState(() {
+        _isLoading = false;
+      });
     }
 
     if (text != null) {
@@ -142,6 +151,8 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ),
+          if(_isLoading)
+            LinearProgressIndicator(),
           TextCompose(
             onSubmit: _onSubmit,
           ),
