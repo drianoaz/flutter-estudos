@@ -12,13 +12,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   void _onSubmit({String text, File imgFile}) async {
-
     Map<String, String> data = {};
 
-    if(imgFile != null) {
-      StorageUploadTask task = FirebaseStorage.instance.ref().child(
-          DateTime.now().millisecondsSinceEpoch.toString()
-      ).putFile(imgFile);
+    if (imgFile != null) {
+      StorageUploadTask task = FirebaseStorage.instance
+          .ref()
+          .child(DateTime.now().millisecondsSinceEpoch.toString())
+          .putFile(imgFile);
 
       StorageTaskSnapshot snapshot = await task.onComplete;
       String url = await snapshot.ref.getDownloadURL();
@@ -26,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
       data["imgUrl"] = url;
     }
 
-    if(text != null) {
+    if (text != null) {
       data["text"] = text;
     }
 
@@ -39,7 +39,29 @@ class _ChatScreenState extends State<ChatScreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: Container(color: Colors.red),
+            child: StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance.collection('messages').snapshots(),
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.none:
+                  case ConnectionState.waiting:
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  default:
+                    List<DocumentSnapshot> documents =
+                        snapshot.data.documents.reversed.toList();
+                    return ListView.builder(
+                        itemCount: documents.length,
+                        reverse: true,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(documents[index].data['text']),
+                          );
+                        });
+                }
+              },
+            ),
           ),
           TextCompose(
             onSubmit: _onSubmit,
