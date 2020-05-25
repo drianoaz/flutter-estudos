@@ -130,7 +130,10 @@ class _ChatScreenState extends State<ChatScreen> {
         children: <Widget>[
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('messages').orderBy('time').snapshots(),
+              stream: Firestore.instance
+                  .collection('messages')
+                  .orderBy('time')
+                  .snapshots(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.none:
@@ -145,14 +148,16 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemCount: documents.length,
                         reverse: true,
                         itemBuilder: (context, index) {
-                          return ChatMessage(documents[index].data, false);
+                          return ChatMessage(
+                            documents[index].data,
+                            documents[index]['uid'] == _currentUser?.uid,
+                          );
                         });
                 }
               },
             ),
           ),
-          if(_isLoading)
-            LinearProgressIndicator(),
+          if (_isLoading) LinearProgressIndicator(),
           TextCompose(
             onSubmit: _onSubmit,
           ),
