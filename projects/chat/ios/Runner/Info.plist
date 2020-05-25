@@ -39,7 +39,24 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Meu aplicativo tira fotos</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Meu aplicativo tira fotos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Meu aplicativo tira fotos</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleURLTypes</key>
+    <array>
+    	<dict>
+    		<key>CFBundleTypeRole</key>
+    		<string>Editor</string>
+    		<key>CFBundleURLSchemes</key>
+    		<array>
+    			<string>com.googleusercontent.apps.305368200307-viss8hp059dm5q5uc61t3c91uev1k6ak</string>
+    		</array>
+    	</dict>
+    </array>
 </dict>
 </plist>
