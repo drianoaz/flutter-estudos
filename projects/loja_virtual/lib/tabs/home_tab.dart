@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatelessWidget {
-
   Widget _buildBodyBack() {
     return Container(
       decoration: BoxDecoration(
@@ -22,7 +22,7 @@ class HomeTab extends StatelessWidget {
     return Stack(
       children: <Widget>[
         _buildBodyBack(),
-        const CustomScrollView(
+        CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
               floating: true,
@@ -33,7 +33,31 @@ class HomeTab extends StatelessWidget {
                 title: Text('Novidades'),
                 centerTitle: true,
               ),
-            )
+            ),
+            FutureBuilder<QuerySnapshot>(
+              future: Firestore.instance.collection('home').orderBy('pos').getDocuments(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return SliverToBoxAdapter(
+                    child: Container(
+                      height: 200,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    ),
+                  );
+                } else {
+                  print(snapshot.data.documents.length);
+                  return SliverToBoxAdapter(
+                    child: Container(
+                      color: Colors.red,
+                    ),
+                  );
+                }
+              },
+            ),
           ],
         )
       ],
