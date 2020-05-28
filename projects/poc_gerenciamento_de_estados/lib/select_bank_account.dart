@@ -8,15 +8,26 @@ class SelectBankAccount extends StatefulWidget {
 }
 
 class _SelectBankAccountState extends State<SelectBankAccount> {
-
   List<String> bankAccounts = ["Conta bancária 1", "Conta bancária 2"];
 
-  Future<void> addBankAccount() {
-    Navigator.of(context).push(MaterialPageRoute(
+  Future<void> addBankAccount() async {
+    String data = await Navigator.of(context).push(
+      MaterialPageRoute(
         builder: (context) {
           return AddBankAccount();
-        }
-    ));
+        },
+      ),
+    );
+
+    if (data != null) {
+      setState(() {
+        bankAccounts.add(data);
+      });
+    }
+  }
+  
+  onSelect(index) {
+    Navigator.of(context).pop(bankAccounts[index]);
   }
 
   @override
@@ -32,13 +43,13 @@ class _SelectBankAccountState extends State<SelectBankAccount> {
         ],
       ),
       body: ListView.builder(
-        itemCount: bankAccounts.length,
+          itemCount: bankAccounts.length,
           itemBuilder: (context, index) {
-            return ListTile(title: Text(bankAccounts[index]), onTap: () {
-              Navigator.of(context).pop(bankAccounts[index]);
-            },);
-          }
-      ),
+            return ListTile(
+              title: Text(bankAccounts[index]),
+              onTap: () => onSelect(index),
+            );
+          }),
     );
   }
 }
