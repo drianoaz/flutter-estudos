@@ -27,6 +27,9 @@ class _AddBankAccountState extends State<AddBankAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: key,
+      appBar: AppBar(
+        title: Text("Adicionar conta bancária"),
+      ),
       body: Container(
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 10.0),
