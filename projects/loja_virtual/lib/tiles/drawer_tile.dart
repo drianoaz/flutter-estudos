@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class DrawerTile extends StatelessWidget {
-  DrawerTile(this.icon, this.text, this.pageController, this.page);
+
+  DrawerTile({
+    @required this.icon,
+    @required this.text,
+    @required this.pageController,
+    @required this.page,
+  });
 
   final IconData icon;
   final String text;
