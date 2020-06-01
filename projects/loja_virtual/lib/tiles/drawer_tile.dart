@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 
 class DrawerTile extends StatelessWidget {
-  DrawerTile(this.icon, this.text);
+  DrawerTile(this.icon, this.text, this.pageController, this.page);
 
   final IconData icon;
   final String text;
+  final PageController pageController;
+  final int page;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).pop();
+          pageController.jumpToPage(page);
+        },
         child: Container(
           height: 60.0,
           child: Row(
             children: <Widget>[
               Icon(
                 icon,
-                color: Colors.black,
+                color: pageController.page.round() == page
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey[700],
                 size: 32.0,
               ),
               SizedBox(
@@ -26,7 +33,12 @@ class DrawerTile extends StatelessWidget {
               ),
               Text(
                 text,
-                style: TextStyle(fontSize: 16.0, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: pageController.page.round() == page
+                      ? Theme.of(context).primaryColor
+                      : Colors.grey[700],
+                ),
               )
             ],
           ),
